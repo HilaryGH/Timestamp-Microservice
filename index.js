@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
-const PROJECT_URL = "https://timestamp-microservice-rzkn.onrender.com/";
 
 // Serve a simple HTML response
 app.get('/', (req, res) => {
@@ -14,13 +13,13 @@ app.get('/', (req, res) => {
       Example Usage:
     </h2>
     <p style="text-align: center; font-size:14px;">
-      <a href="${PROJECT_URL}/api/date/2025-03-10" target="_blank" style="color:lightblue;">
-        ${PROJECT_URL}/api/date/2025-03-10
+      <a href="/api/date/2025-03-10" target="_blank" style="color:lightblue;">
+        /api/date/2025-03-10
       </a>
     </p>
     <p style="text-align: center; font-size:14px;">
-      <a href="${PROJECT_URL}/api/date" target="_blank" style="color:lightblue;">
-        ${PROJECT_URL}/api/date
+      <a href="/api/date" target="_blank" style="color:lightblue;">
+        /api/date
       </a>
     </p>
     <h2 style="color:#3d3d3d; font-size: 20px; text-align: center;">
@@ -34,7 +33,7 @@ app.get('/', (req, res) => {
 
 // API endpoint for timestamp conversion using '/api/date/:date_string?' (date_string is optional)
 app.get('/api/date/:date_string?', (req, res) => {
-  const { date_string } = req.params; // Get the date_string parameter from the URL
+  const { date_string } = req.params;
   let date;
 
   // If no date_string is provided, use the current date
@@ -43,7 +42,7 @@ app.get('/api/date/:date_string?', (req, res) => {
   } else {
     // If date_string is a valid Unix timestamp, convert it to Date object
     if (!isNaN(date_string)) {
-      date = new Date(parseInt(date_string));
+      date = new Date(parseInt(date_string)); // Handle Unix timestamps
     } else {
       // Otherwise, try to parse it as a standard date string
       date = new Date(date_string);
@@ -56,8 +55,8 @@ app.get('/api/date/:date_string?', (req, res) => {
   } else {
     // Return JSON object with unix and utc keys
     res.json({
-      unix: date.getTime(),
-      utc: date.toUTCString()
+      unix: date.getTime(),        // Correct Unix timestamp in milliseconds
+      utc: date.toUTCString()      // Correct UTC string format
     });
   }
 });
@@ -66,4 +65,6 @@ app.get('/api/date/:date_string?', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
 
