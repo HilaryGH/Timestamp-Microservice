@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+const PROJECT_URL = "https://timestamp-microservice-rzkn.onrender.com/";
 // Serve a simple HTML response
 app.get('/', (req, res) => {
     res.send(`
@@ -13,13 +13,13 @@ app.get('/', (req, res) => {
         Example Usage:
       </h2>
       <p style="text-align: center; font-size:14px;">
-        <a href="/api/date/2025-03-10" target="_blank" style="color:lightblue;">
-          [your project URL] /api/date/2025-03-10
+        <a href="${PROJECT_URL}/api/date/2025-03-10" target="_blank" style="color:lightblue;">
+          ${PROJECT_URL} /api/date/2025-03-10
         </a>
       </p>
       <p style="text-align: center; font-size:14px;">
-        <a href="/api/date" target="_blank" style="color:lightblue;">
-          [your project URL] /api/date
+        <a href="${PROJECT_URL}/api/date" target="_blank" style="color:lightblue;">
+          ${PROJECT_URL}/api/date
         </a>
       </p>
       <h2 style="color:#3d3d3d; font-size: 20px; text-align: center;">
