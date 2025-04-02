@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
 // Serve a simple HTML response
 app.get('/', (req, res) => {
   res.send(`
@@ -31,8 +33,8 @@ app.get('/', (req, res) => {
   `);
 });
 
-// API endpoint for timestamp conversion using '/api/date/:date_string?' (date_string is optional)
-app.get('/api/date/:date_string?', (req, res) => {
+// API endpoint for timestamp conversion using '/api/:date_string?' (date_string is optional)
+app.get('/api/:date_string?', (req, res) => {
   const { date_string } = req.params;
   let date;
 
@@ -60,11 +62,12 @@ app.get('/api/date/:date_string?', (req, res) => {
     });
   }
 });
-
 // Start the Express server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
 
 
 
